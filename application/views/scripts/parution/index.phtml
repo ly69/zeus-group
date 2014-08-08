@@ -1,0 +1,41 @@
+
+<div class="row">
+    <?= $this->ongletParution ?>
+    <div class="well">
+        <h1 class="text-center">Parution</h1>
+        <div class="list-group">
+            <?php foreach ($this->listParution as $parution) : ?>
+                <a href="/parution/page/id/<?php echo $parution->getIdParution() ?>" class="list-group-item">
+                    <div class="media col-md-3 img-parution-list">
+
+                        <img class="media-object img-rounded img-responsive" style="max-height: 100%"  src="/img/<?php echo $parution->getImageParution() ?>" alt="/img/<?php echo $parution->getImageParution() ?>" >
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="list-group-item-heading"><?php echo $parution->getTitreParution() ?></h4>
+                        <p class="list-group-item-text"><?php echo $parution->getDescriptionParution() ?></p>
+                    </div>
+                    <div class="col-md-3 text-center">
+                    </div>
+                    <div class="col-md-3 ">
+                        <?php
+                        if ($parution->getAuteurParution() == NULL) {
+                            $auteur = 'Aucun';
+                        } else {
+                            $auteur = $parution->getAuteurParution()->getNameAuteur();
+                        }
+                        if ($parution->getThemeParution() == NULL) {
+                            $theme = 'Aucun';
+                        } else {
+                            $theme = $parution->getThemeParution()->getNameTheme();
+                        }
+                        ?>
+                        <span class="h4"><span class="glyphicon glyphicon-user"></span> Auteur</span> : <?php echo $auteur ?><br>
+                        <span class="h4"><span class="glyphicon glyphicon-list-alt"></span> Theme</span> : <?php echo $theme ?><br>
+                        <span class="h4"><span class="glyphicon glyphicon-calendar"></span> Date de sortie</span> : <?php echo $parution->getDateParution() ?><br>
+                    </div>
+                </a>
+<?php endforeach; ?>       
+        </div>
+    </div>
+</div>

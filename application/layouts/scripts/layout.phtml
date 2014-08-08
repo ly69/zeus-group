@@ -1,0 +1,108 @@
+<?php
+echo $this->doctype();
+?>
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headLink(); ?>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">               
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <?=
+                $this->navigation()
+            ->menu()
+            ->setUlClass('nav navbar-nav')
+            ->setPartial(array('navigation/menu.phtml','default'));
+                ?>
+                <form class="navbar-form navbar-left">
+                    <div id="bloodhound">
+                        <input class="typeahead form-control" type="text" placeholder="States of USA">
+                    </div>
+                    <span class="tt-dropdown-menu"><div class="tt-dataset-states"></div></span>
+                </form>
+                <form method="post" class='navbar-form navbar-right' action='/auth/'>
+<?php if (!isset($_SESSION['user'])) { ?>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-default">Connexion</button>
+
+<?php } else { ?>
+                        Bonjour <?php echo $_SESSION['user']['prenom_user'] ?> <?php echo $_SESSION['user']['nom_user'] ?>
+
+                        <button type='submit' name="deco" value="1" class="btn btn-danger">Déconnexion</button>
+<?php } ?>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class='row'>
+        <div class='col-lg-2 breadcrumb'>
+           <?= $this->navigation()
+        	->breadcrumbs()
+        	->setMinDepth(0)
+        	->setRenderInvisible(true)
+        	->setSeparator(' / ')
+        	?> 
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-2">
+            <div class="well">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="">
+                        <a href="/parution/"> 
+                            Gestion des parutions
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="/user/list/">
+                            Gestion des personnes inscrites
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            Configuration de la page d'acceuil
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            Mes emprunts
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container col-lg-8">
+<?php echo $this->layout()->content; ?>
+        </div>
+        <div class='col-lg-2'>
+            <div class="panel panel-default">
+
+                <div class="panel-heading">Plugin</div>
+                <div class="panel-body">
+                    Nouvelle parution
+                </div>
+
+            </div>
+        </div>  
+    </div>
+
+</div>
+<?php echo $this->headScript(); ?>
+<?= $this->inlineScript() . PHP_EOL?>
+
+</body>

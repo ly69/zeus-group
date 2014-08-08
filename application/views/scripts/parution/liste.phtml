@@ -1,0 +1,61 @@
+<div class="row">
+    <?= $this->ongletParution ?>
+
+    <br><br>
+
+    <center><a href="/parution/page/"><button class="btn btn-success">Ajouter une parution</button></a></center>
+
+    <table id='listeParution' class='display'>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Thème</th>
+                <th>Date de sortie</th>
+                <th>Quantité disponible</th>
+                <th>Quantité total</th>
+                <th>Editeur</th>
+                <th>Collection</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $parutions = $this->listParution;
+
+            foreach ($parutions as $parution):
+                ?>
+
+                <tr>
+                    <?php
+                    if ($parution->getAuteurParution() == NULL) {
+                        $auteur = 'Aucun';
+                    } else {
+                        $auteur = $parution->getAuteurParution()->getNameAuteur();
+                    }
+                    if ($parution->getThemeParution() == NULL) {
+                        $theme = 'Aucun';
+                    } else {
+                        $theme = $parution->getThemeParution()->getNameTheme();
+                    }
+                    ?>
+                    <td><a href="/parution/page/id/<?= $parution->getIdParution(); ?>"><?= $parution->getTitreParution(); ?></td>
+                    <td><?= $auteur ?></td>
+                    <td><?= $theme ?></td>
+                    <td><?= $parution->getDateParution(); ?></td>
+                    <td><?= $parution->getQteDispoParution(); ?></td>
+                    <td><?= $parution->getQteTotalParution(); ?></td>
+                    <td><?= $parution->getEditeurParution()->getNameEditeur(); ?></td>
+                    <td><?= $parution->getCollectionParution()->getNameCollection(); ?>1</td>
+
+
+                </tr>
+
+
+                <?php
+            endforeach;
+            ?>
+        </tbody>
+    </table>
+</div>
